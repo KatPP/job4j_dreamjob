@@ -5,43 +5,17 @@
 </head>
 <body>
 <div th:replace="fragments/navigation :: navigation"></div>
-<div class="container">
-    <h1 class="mt-5">Главная страница</h1>
-    <p class="lead">Добро пожаловать в Job4j Dream Job!</p>
 
-    <div class="row">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Имя</th>
-                <th scope="col">Фамилия</th>
-                <th scope="col">Почта</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="container mt-4">
+    <h2>Проект job4j_dreamjob, выполняемый в рамках курса Job4j</h2>
+    <ul>
+        <li><a th:href="@{/vacancies}">Вакансии</a></li>
+        <li><a th:href="@{/candidates}">Кандидаты</a></li>
+        <li><a th:href="@{/vacancies/create}">Создать вакансию</a></li>
+        <li><a th:href="@{/candidates/create}">Создать резюме</a></li>
+    </ul>
 </div>
+
 <footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
 </html>

@@ -4,6 +4,7 @@
     <!-- Этот контент будет заменен фрагментом -->
 </head>
 <body>
+<div th:replace="fragments/navigation :: navigation"></div>
 <div class="container">
     <h1 class="mt-5">Главная страница</h1>
     <p class="lead">Добро пожаловать в Job4j Dream Job!</p>
@@ -13,9 +14,9 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Имя</th>
+                <th scope="col">Фамилия</th>
+                <th scope="col">Почта</th>
             </tr>
             </thead>
             <tbody>

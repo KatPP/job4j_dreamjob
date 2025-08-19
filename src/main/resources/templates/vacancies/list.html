@@ -2,13 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:include="fragments/header :: header"></head>
 <body>
+<div th:replace="fragments/navigation :: navigation"></div>
 <div class="container">
   <div class="row">
     <table class="table">
       <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Имя</th>
+        <th scope="col">Позиция</th>
+        <th scope="col">Описание позиции</th>
+        <th scope="col">Дата создания</th>
       </tr>
       </thead>
       <tbody>

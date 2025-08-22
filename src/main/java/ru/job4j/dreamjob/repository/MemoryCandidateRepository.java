@@ -33,13 +33,9 @@ public class MemoryCandidateRepository implements CandidateRepository {
 
     @Override
     public void saveCandidate(Candidate candidate) {
-        // Если это новый кандидат (id = 0), присваиваем новый ID
-        if (candidate.getId() == 0) {
-            candidate.setId(nextId++);
-        }
+        candidate.setId(nextId++);
         candidate.setCreationDate(LocalDateTime.now());
         candidaties.put(candidate.getId(), candidate);
-        System.out.println("Сохранён кандидат: " + candidate.getName() + " с ID: " + candidate.getId());
     }
 
     @Override

@@ -1,22 +1,25 @@
 package ru.job4j.dreamjob.repository;
 
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Candidate;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
+@ThreadSafe
 @Repository
 public class MemoryCandidateRepository implements CandidateRepository {
 
     private static final MemoryCandidateRepository INSTANCE_NEW = new MemoryCandidateRepository();
 
-    private int nextId = 1;
+    private final AtomicInteger nextId = new AtomicInteger(1);
 
-    private final Map<Integer, Candidate> candidaties = new HashMap<>();
+    private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
 
     private MemoryCandidateRepository() {
         saveCandidate(new Candidate(0, "Bob", "просто описание", LocalDateTime.now()));
@@ -33,21 +36,21 @@ public class MemoryCandidateRepository implements CandidateRepository {
 
     @Override
     public Candidate saveCandidate(Candidate candidate) {
-        candidate.setId(nextId++);
+        candidate.setId(nextId.getAndIncrement());
         candidate.setCreationDate(LocalDateTime.now());
-        candidaties.put(candidate.getId(), candidate);
+        candidates.put(candidate.getId(), candidate);
         return candidate;
     }
 
     @Override
     public boolean deleteByIdCandidate(int id) {
-        Candidate removed = candidaties.remove(id);
+        Candidate removed = candidates.remove(id);
         return removed != null;
     }
 
     @Override
     public boolean updateCandidate(Candidate candidate) {
-        return candidaties.computeIfPresent(candidate.getId(),
+        return candidates.computeIfPresent(candidate.getId(),
                 (id, oldCandidate) -> new Candidate(
                         oldCandidate.getId(),
                         candidate.getName(),
@@ -58,11 +61,11 @@ public class MemoryCandidateRepository implements CandidateRepository {
 
     @Override
     public Optional<Candidate> findByIdCandidate(int id) {
-        return Optional.ofNullable(candidaties.get(id));
+        return Optional.ofNullable(candidates.get(id));
     }
 
     @Override
     public Collection<Candidate> findAllCandidate() {
-        return candidaties.values();
+        return candidates.values();
     }
 }

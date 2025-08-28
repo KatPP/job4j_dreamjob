@@ -16,6 +16,12 @@
             <textarea class="form-control" id="description" name="description"
                       rows="5" placeholder="Опишите кандидата" required></textarea>
         </div>
+        <div class="mb-3">
+            <label for="city"><b>Город</b></label>
+            <select class="form-control" id="city" name="cityId">
+                <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}"></option>
+            </select>
+        </div>
         <div class="mb-3 row">
             <div class="col-6">
                 <a class="btn btn-danger w-100" th:href="@{/candidates}">Отмена</a>

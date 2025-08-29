@@ -1,41 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="fragments/header :: header"></head>
+<head th:replace="~{fragments/header :: header}"></head>
 <body>
-<div th:replace="fragments/navigation :: navigation"></div>
-<div class="container">
-  <div class="row">
-    <div class="container">
-      <div class="row">
-        <table class="table">
-          <thead>
-          <tr>
-            <th><i class="bi bi-square"></i></th>
-            <th scope="col">#</th>
-            <th scope="col">Название</th>
-            <th scope="col">Дата создания</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr th:each="vacancy: ${vacancies}">
-            <td>
-              <span th:if="${vacancy.visible}">
-                <i class="bi bi-check-square"></i>
-              </span>
-              <span th:if="${!vacancy.visible}">
-                  <i class="bi bi-square"></i>
-              </span>
-            </td>
-            <td th:text="${vacancy.id}"/>
-            <td><a th:text="${vacancy.title}"
-                   th:href="@{/vacancies/{vacancyId}(vacancyId=${vacancy.id})}"></a>
-            </td>
-            <td th:text="${vacancy.creationDate}"/>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <footer th:include="fragments/footer :: footer"></footer>
+<div th:replace="~{fragments/navigation :: navigation}"></div>
+
+<div class="container mt-4">
+  <h2>Вакансии</h2>
+  <a class="btn btn-primary mb-3" th:href="@{/vacancies/create}">Создать вакансию</a>
+
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th><i class="bi bi-square"></i></th>
+      <th>#</th>
+      <th>Название</th>
+      <th>Дата создания</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="vacancy: ${vacancies}">
+      <td>
+                <span th:if="${vacancy.visible}">
+                    <i class="bi bi-check-square"></i>
+                </span>
+        <span th:if="${!vacancy.visible}">
+                    <i class="bi bi-square"></i>
+                </span>
+      </td>
+      <td th:text="${vacancy.id}"/>
+      <td><a th:text="${vacancy.title}"
+             th:href="@{/vacancies/{vacancyId}(vacancyId=${vacancy.id})}"></a>
+      </td>
+      <td th:text="${vacancy.creationDate}"/>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
 </html>

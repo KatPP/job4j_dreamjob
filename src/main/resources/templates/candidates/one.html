@@ -4,39 +4,47 @@
 <body>
 <div th:replace="fragments/navigation :: navigation"></div>
 <div class="container">
-    <form class="mt-3" th:action="@{/candidates/update}" method="post" th:object="${candidate}">
+    <h2 class="mt-3">Редактировать кандидата</h2>
+    <form class="mt-3" th:action="@{/candidates/update}" method="post" th:object="${candidate}" enctype="multipart/form-data">
         <input type="hidden" name="id" th:field="*{id}">
-        <div class="mb-3">
-            <label for="name" class="form-label"><b>Имя</b></label>
-            <input type="text" class="form-control" id="name" name="name"
-                   th:field="*{name}"
-                   placeholder="Введите имя кандидата">
+        <input type="hidden" name="fileId" th:field="*{fileId}">
+        <div class="row mb-3">
+            <div class="col-3">
+                <div class="mb-3">
+                    <img th:src="@{/files/{fileId}(fileId=*{fileId})}" class="w-100" alt="No image" onerror="this.src='/images/no-image.png'">
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label"><b>Новое фото</b></label>
+                    <input class="form-control form-control-sm" type="file" id="formFile" name="file">
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="mb-3">
+                    <label for="name" class="form-label"><b>Имя</b></label>
+                    <input type="text" class="form-control" id="name" name="name"
+                           th:field="*{name}"
+                           placeholder="Введите имя кандидата" required>
+                </div>
+                <div class="mb-3">
+                    <label for="city"><b>Город</b></label>
+                    <select class="form-control" id="city" name="cityId" required>
+                        <option value="">Выберите город</option>
+                        <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}" th:field="*{cityId}" th:selected="${city.id==cityId}"></option>
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label"><b>Описание</b></label>
             <textarea class="form-control" id="description"
                       name="description" th:field="*{description}"
-                      rows="10" placeholder="Опишите кандидата"></textarea>
+                      rows="15" placeholder="Опишите кандидата" required></textarea>
         </div>
-        <div class="mb-3">
-            <label for="city"><b>Город</b></label>
-            <select class="form-control" id="city" name="cityId">
-                <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}" th:field="*{cityId}" th:selected="${city.id==cityId}"></option>
-            </select>
-        </div>
-        <div class="mb-3 row">
-            <div class="col-6"></div>
-            <div class="col-6">
-                <div class="row">
-                    <div class="col-4"><a class="btn btn-light w-100"
-                                          th:href="@{/candidates}">Отмена</a></div>
-                    <div class="col-4"><a class="btn btn-danger w-100"
-                                          th:href="@{/candidates/delete/{id}(id=${candidate.id})}">Удалить</a></div>
-                    <div class="col-4"><button class="btn btn-success w-100"
-                                               type="submit">Обновить</button>
-                    </div>
-                </div>
-            </div>
+        <div class="mt-4 d-flex gap-2 justify-content-end">
+            <a class="btn btn-light" th:href="@{/candidates}">Отмена</a>
+            <a class="btn btn-danger" th:href="@{/candidates/delete/{id}(id=${candidate.id})}"
+               onclick="return confirm('Вы уверены, что хотите удалить этого кандидата?')">Удалить</a>
+            <button class="btn btn-success" type="submit">Обновить</button>
         </div>
     </form>
 </div>

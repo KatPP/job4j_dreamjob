@@ -22,12 +22,12 @@ public class MemoryCandidateRepository implements CandidateRepository {
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
 
     private MemoryCandidateRepository() {
-        saveCandidate(new Candidate(0, "Bob", "просто описание", LocalDateTime.now(), 1));
-        saveCandidate(new Candidate(0, "Cat", "просто описание", LocalDateTime.now(), 1));
-        saveCandidate(new Candidate(0, "Robert", "просто описание", LocalDateTime.now(), 2));
-        saveCandidate(new Candidate(0, "Pavel", "просто описание", LocalDateTime.now(), 2));
-        saveCandidate(new Candidate(0, "Max", "просто описание", LocalDateTime.now(), 2));
-        saveCandidate(new Candidate(0, "Fred", "просто описание", LocalDateTime.now(), 3));
+        saveCandidate(new Candidate(0, "Bob", "просто описание", LocalDateTime.now(), 1, 0));
+        saveCandidate(new Candidate(0, "Cat", "просто описание", LocalDateTime.now(), 1, 0));
+        saveCandidate(new Candidate(0, "Robert", "просто описание", LocalDateTime.now(), 2, 0));
+        saveCandidate(new Candidate(0, "Pavel", "просто описание", LocalDateTime.now(), 2, 0));
+        saveCandidate(new Candidate(0, "Max", "просто описание", LocalDateTime.now(), 2, 0));
+        saveCandidate(new Candidate(0, "Fred", "просто описание", LocalDateTime.now(), 3, 0));
     }
 
     public static MemoryCandidateRepository getInstance() {
@@ -56,7 +56,8 @@ public class MemoryCandidateRepository implements CandidateRepository {
                         candidate.getName(),
                         candidate.getDescription(),
                         oldCandidate.getCreationDate(),
-                        candidate.getCityId()
+                        candidate.getCityId(),
+                        candidate.getFileId()
                 )) != null;
     }
 

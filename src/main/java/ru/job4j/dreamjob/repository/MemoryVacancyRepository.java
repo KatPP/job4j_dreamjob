@@ -21,12 +21,12 @@ public class MemoryVacancyRepository implements VacancyRepository {
     private final Map<Integer, Vacancy> vacancies = new ConcurrentHashMap<>();
 
     public MemoryVacancyRepository() {
-        save(new Vacancy(0, "Intern Java Developer", "Description for Intern", LocalDateTime.now(), false, 1));
-        save(new Vacancy(0, "Junior Java Developer", "Description for Junior", LocalDateTime.now(), true, 1));
-        save(new Vacancy(0, "Junior+ Java Developer", "Description for Junior+", LocalDateTime.now(), true, 2));
-        save(new Vacancy(0, "Middle Java Developer", "Description for Middle", LocalDateTime.now(), true, 2));
-        save(new Vacancy(0, "Middle+ Java Developer", "Description for Middle+", LocalDateTime.now(), true, 3));
-        save(new Vacancy(0, "Senior Java Developer", "Description for Senior", LocalDateTime.now(), true, 3));
+        save(new Vacancy(0, "Intern Java Developer", "Стажер Java разработчик", LocalDateTime.now(), true, 1, 0));
+        save(new Vacancy(0, "Junior Java Developer", "Младший Java разработчик", LocalDateTime.now(), true, 1, 0));
+        save(new Vacancy(0, "Junior+ Java Developer", "Java разработчик", LocalDateTime.now(), true, 2, 0));
+        save(new Vacancy(0, "Middle Java Developer", "Старший Java разработчик", LocalDateTime.now(), true, 2, 0));
+        save(new Vacancy(0, "Middle+ Java Developer", "Ведущий Java разработчик", LocalDateTime.now(), true, 2, 0));
+        save(new Vacancy(0, "Senior Java Developer", "Главный Java разработчик", LocalDateTime.now(), true, 3, 0));
     }
 
     @Override
@@ -47,7 +47,7 @@ public class MemoryVacancyRepository implements VacancyRepository {
     public boolean update(Vacancy vacancy) {
         return vacancies.computeIfPresent(vacancy.getId(), (id, oldVacancy) -> new Vacancy(
                 oldVacancy.getId(), vacancy.getTitle(), vacancy.getDescription(),
-                vacancy.getCreationDate(), vacancy.getVisible(), vacancy.getCityId()
+                vacancy.getCreationDate(), vacancy.getVisible(), vacancy.getCityId(), vacancy.getFileId()
         )) != null;
     }
 

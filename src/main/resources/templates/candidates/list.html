@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="fragments/header :: header"></head>
+<head th:replace="~{fragments/header :: header}"></head>
 <body>
-<div th:replace="fragments/navigation :: navigation"></div>
-<div class="container">
-  <div class="row">
-    <table class="table">
-      <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Имя</th>
-        <th scope="col">Дата создания</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="candidate: ${candidates}">
-        <td th:text="${candidate.id}" />
-        <td>
-          <a th:text="${candidate.name}"
-             th:href="@{/candidates/{candidateId}(candidateId=${candidate.id})}">
-          </a>
-        </td>
-        <td th:text="${candidate.creationDate}" />
-      </tr>
-      </tbody>
-    </table>
-  </div>
+<div th:replace="~{fragments/navigation :: navigation}"></div>
+
+<div class="container mt-4">
+  <h2>Кандидаты</h2>
+  <a class="btn btn-primary mb-3" th:href="@{/candidates/create}">Создать кандидата</a>
+
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Имя</th>
+      <th>Дата создания</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="candidate: ${candidates}">
+      <td th:text="${candidate.id}" />
+      <td>
+        <a th:text="${candidate.name}"
+           th:href="@{/candidates/{candidateId}(candidateId=${candidate.id})}">
+        </a>
+      </td>
+      <td th:text="${candidate.creationDate}" />
+    </tr>
+    </tbody>
+  </table>
 </div>
-<footer th:include="fragments/footer :: footer"></footer>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
 </html>

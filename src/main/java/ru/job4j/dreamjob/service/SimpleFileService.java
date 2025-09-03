@@ -25,12 +25,12 @@ public class SimpleFileService implements FileService {
 
     /**
      * Конструктор сервиса файлов.
-     * @param fileRepository репозиторий для работы с файлами в БД
+     * @param sql2oFileRepository репозиторий для работы с файлами в БД
      * @param storageDirectory путь к директории для хранения файлов (берется из application.properties)
      */
-    public SimpleFileService(FileRepository fileRepository,
+    public SimpleFileService(FileRepository sql2oFileRepository,
                              @Value("${file.directory}") String storageDirectory) {
-        this.fileRepository = fileRepository;
+        this.fileRepository = sql2oFileRepository;
         this.storageDirectory = storageDirectory;
         // Создаем директорию для хранения файлов при запуске приложения
         createStorageDirectory(storageDirectory);

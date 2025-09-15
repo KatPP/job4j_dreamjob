@@ -19,6 +19,18 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Зависимости версий -->
+        <net.jcip.version>1.0</net.jcip.version>
+        <postgresql.version>42.5.1</postgresql.version>
+        <commons-dbcp2.version>2.9.0</commons-dbcp2.version>
+        <sql2o.version>1.6.0</sql2o.version>
+        <h2.version>2.1.214</h2.version>
+
+        <!-- Плагины версий -->
+        <checkstyle.version>8.42</checkstyle.version>
+        <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
+        <liquibase-maven-plugin.version>4.20.0</liquibase-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -31,15 +43,13 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.jcip</groupId>
-            <artifactId>jcip-annotations</artifactId>
-            <version>1.0</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
         <dependency>
             <groupId>net.jcip</groupId>
             <artifactId>jcip-annotations</artifactId>
-            <version>1.0</version>
-            <scope>compile</scope>
+            <version>${net.jcip.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -50,26 +60,22 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.5.1</version>
+            <version>${postgresql.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>
-            <version>2.9.0</version>
+            <version>${commons-dbcp2.version}</version>
         </dependency>
         <dependency>
             <groupId>org.sql2o</groupId>
             <artifactId>sql2o</artifactId>
-            <version>1.6.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${sql2o.version}</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>2.1.214</version>
+            <version>${h2.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -101,12 +107,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>${maven-checkstyle-plugin.version}</version>
                 <dependencies>
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>8.42</version>
+                        <version>${checkstyle.version}</version>
                     </dependency>
                 </dependencies>
                 <executions>
@@ -129,7 +135,7 @@
             <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
-                <version>4.20.0</version>
+                <version>${liquibase-maven-plugin.version}</version>
                 <configuration>
                     <propertyFile>${liquibase.config}</propertyFile>
                 </configuration>
